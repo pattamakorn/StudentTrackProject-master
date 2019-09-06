@@ -40,7 +40,7 @@ public class SessionManager {
 
     public void checkLogin(){
         if (!this.isLogin()){
-            Intent i = new Intent(context,login.class);
+            Intent i = new Intent(context,MainActivity.class);
             context.startActivity(i);
             ((MainActivity) context).finish();
         }
