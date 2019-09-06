@@ -35,12 +35,12 @@ public class SessionManager {
     }
 
     public boolean isLogin(){
-        return sharedPreferences.getBoolean(LOGIN,true);
+        return sharedPreferences.getBoolean(LOGIN,false);
     }
 
     public void checkLogin(){
         if (!this.isLogin()){
-            Intent i = new Intent(context,MainActivity.class);
+            Intent i = new Intent(context,login.class);
             context.startActivity(i);
             ((MainActivity) context).finish();
         }

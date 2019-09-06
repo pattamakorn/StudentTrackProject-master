@@ -75,15 +75,9 @@ public class MainActivity extends AppCompatActivity {
         int id = itemtop.getItemId();
         switch (id) {
             case R.id.qrcode_menu:
-                Toast.makeText(getApplicationContext(), "QR Code", Toast.LENGTH_LONG).show();
                 getSupportFragmentManager().beginTransaction().add(R.id.frameLayout,new qrcode()).commit();
-//                Intent intent = new Intent(MainActivity.this, maps.class);
-//                startActivity(intent);
                 return true;
             case R.id.logout_menu:
-//                Intent intent = new Intent(MainActivity.this,login.class);
-//                startActivity(intent);
-//                Toast.makeText(getApplicationContext(), "Logout Success", Toast.LENGTH_LONG).show();
                 sessionManager.logout();
             default:
                 return super.onOptionsItemSelected(itemtop);
