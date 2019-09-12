@@ -45,8 +45,13 @@ public class TimeTable extends Fragment {
     private TextView day,date;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private List<timetableday> Listtableday;
+    private List<timetableday> listtimetable;
     private static String URL_timetable = "http://192.168.64.2/android_register_login/timetable.php";
+
+    private RecyclerView.LayoutManager recyclerViewlayoutManager;
+
+    private RecyclerView.Adapter recyclerViewadapter;
+
 
 
 
@@ -60,15 +65,6 @@ public class TimeTable extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_time_table, container, false);
-
-
-//        timetableja();
-//
-//        Listtableday = new ArrayList<>();
-//        recyclerView = view.findViewById(R.id.showtimetable);
-//        linearLayoutManager = new LinearLayoutManager(getContext());
-//        //recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(linearLayoutManager);
 
     }
 
@@ -88,54 +84,64 @@ public class TimeTable extends Fragment {
         // txtResult
         date.setText(myear+"/"+d);
         day.setText(mday);
+
+        timetableja();
+
+        listtimetable = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.showtimetable);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerViewlayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(recyclerViewlayoutManager);
+
     }
-    //    private void timetableja(){
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST,URL_timetable,
-//                new Response.Listener<String>(){
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            String success = jsonObject.getString("success");
-//                            JSONArray jsonArray = jsonObject.getJSONArray("read");
-//                            if (success.equals("1")){
-//                                for (int i = 0; i < jsonArray.length(); i++) {
-//                                    JSONObject posts = jsonArray.getJSONObject(i);
-//                                    Listtableday.add(new timetableday(
-//                                            posts.getString("subject"),
-//                                            posts.getString("subjectname"),
-//                                            posts.getString("fullname"),
-//                                            posts.getString("classroom"),
-//                                            posts.getString("timestart"),
-//                                            posts.getString("timestop")
-//                                    ));
-//                                    timetabledayAdpter rvt = new timetabledayAdpter(view.getContext(),Listtableday);
-//                                    recyclerView.setAdapter(rvt);
-//                                }
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(getContext(), "Error:"+e.toString(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                },new Response.ErrorListener(){
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getContext(), "Error:"+error.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        }){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> params = new HashMap<>();
-//                params.put("id","593021017-2");
-//                params.put("term","1");
-//                params.put("year","2562");
-//                params.put("day1","จันทร์");
-//                params.put("day2","จันทร์");
-//                return params;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-//        requestQueue.add(stringRequest);
-//    }
+        private void timetableja(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,URL_timetable,
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+                            if (success.equals("1")){
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject posts = jsonArray.getJSONObject(i);
+                                    listtimetable.add(new timetableday(
+                                            posts.getString("idsubject"),
+                                            posts.getString("subjectname"),
+                                            posts.getString("teachsubject"),
+                                            posts.getString("classroom"),
+                                            posts.getString("starttime"),
+                                            posts.getString("stoptime")
+                                    ));
+                                    timetabledayAdpter rvt = new timetabledayAdpter(view.getContext(),listtimetable);
+                                    recyclerView.setAdapter(rvt);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), "Error:"+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Error:"+error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("id","593021017-2");
+                params.put("term","1");
+                params.put("year","2562");
+                params.put("day1","จันทร์");
+                params.put("day2","จันทร์");
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+    }
 }

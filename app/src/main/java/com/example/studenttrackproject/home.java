@@ -61,7 +61,7 @@ public class home extends Fragment {
         fullname = getView().findViewById(R.id.fullname);
         studentclass = getView().findViewById(R.id.classstudent);
         nameteach = getView().findViewById(R.id.myteacher);
-        tel = getView().findViewById(R.id.tel_teacherClass);
+        tel = getView().findViewById(R.id.teal_teacherClass);
         sessionManager = new SessionManager(getContext());
         sessionManager.checkLogin();
         HashMap<String,String> user = sessionManager.getUserDetail();

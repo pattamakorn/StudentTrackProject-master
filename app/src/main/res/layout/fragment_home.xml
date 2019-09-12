@@ -81,7 +81,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tel_teacherClass"
+            android:id="@+id/teal_teacherClass"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/myteacher"

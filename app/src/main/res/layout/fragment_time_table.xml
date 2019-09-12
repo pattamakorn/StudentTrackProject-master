@@ -109,12 +109,12 @@
             android:textColor="#fff" />
     </RelativeLayout>
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/showtimetable"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="537dp"-->
-        <!--android:layout_marginTop="510px"-->
-        <!--tools:listitem="@layout/timetable_item" />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/showtimetable"
+        android:layout_width="match_parent"
+        android:layout_height="537dp"
+        android:layout_marginTop="510px"
+        tools:listitem="@layout/timetable_item" />
 
 
 </FrameLayout>
